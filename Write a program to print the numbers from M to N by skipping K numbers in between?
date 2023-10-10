@@ -1,0 +1,29 @@
+public class PrintNumbersWithSkip {
+    public static void main(String[] args) {
+        int M = 50;
+        int N = 100;
+        int K = 7;
+
+        printNumbersWithSkip(M, N, K);
+    }
+
+    public static void printNumbersWithSkip(int M, int N, int K) {
+        if (K <= 0) {
+            System.out.println("K must be greater than zero");
+            return;
+        }
+
+        if (M > N) {
+            System.out.println("M must be less than or equal to N");
+            return;
+        }
+
+        int currentNumber = M;
+        while (currentNumber <= N) {
+            System.out.print(currentNumber + ", ");
+            currentNumber += K;
+        }
+
+        System.out.println("…");
+    }
+}
