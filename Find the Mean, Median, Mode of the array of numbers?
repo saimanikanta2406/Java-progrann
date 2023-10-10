@@ -1,0 +1,57 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class MeanMedianMode {
+    public static void main(String[] args) {
+        int[] numbers = { 5, 2, 7, 2, 4, 7, 8, 2, 3, 1, 6, 5, 7 };
+
+        double mean = calculateMean(numbers);
+        double median = calculateMedian(numbers);
+        int mode = calculateMode(numbers);
+
+        System.out.println("Mean: " + mean);
+        System.out.println("Median: " + median);
+        System.out.println("Mode: " + mode);
+    }
+
+    public static double calculateMean(int[] numbers) {
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+        return (double) sum / numbers.length;
+    }
+
+    public static double calculateMedian(int[] numbers) {
+        Arrays.sort(numbers);
+        int middle = numbers.length / 2;
+        if (numbers.length % 2 == 0) {
+            double median1 = numbers[middle - 1];
+            double median2 = numbers[middle];
+            return (median1 + median2) / 2.0;
+        } else {
+            return numbers[middle];
+        }
+    }
+
+    public static int calculateMode(int[] numbers) {
+        Map<Integer, Integer> countMap = new HashMap<>();
+        for (int num : numbers) {
+            countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+        }
+
+        int maxCount = 0;
+        int mode = 0;
+
+        for (Entry<Integer, Integer> entry : countMap.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                mode = entry.getKey();
+            }
+        }
+
+        return mode;
+    }
+}
